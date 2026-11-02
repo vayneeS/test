@@ -11,4 +11,4 @@ def subtract( a, b ):  # E201/E202 : espaces parasites
 
 class calculator:  # N801 : nom de classe doit être en PascalCase
     def multiply(self,x,y):  # E231
-        return x*y
+        return x*y 

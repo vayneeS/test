@@ -10,4 +10,3 @@ def subtract(a, b):
 class Calculator:
     def multiply(self, x, y):
         return x * y
-    

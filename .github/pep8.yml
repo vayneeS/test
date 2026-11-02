@@ -1,0 +1,46 @@
+name: Vérification PEP8 - flake8
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Lint PEP8 with flake8
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : récupérer le code du dépôt
+      - name: Checkout du code
+        uses: actions/checkout@v5
+
+      # Étape 2 : configurer Python
+      - name: Configurer Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'         # Met en cache les dépendances pip
+
+      # Étape 3 : installer les outils de linting
+      - name: Installer flake8
+        run: |
+          pip install --upgrade pip
+          pip install flake8
+
+      # Étape 4 : lancer flake8
+      - name: Vérification PEP8 avec flake8
+        run: |
+          set +e
+
+          echo "=============================="
+          echo "      FLAKE8 STATISTICS"
+          echo "=============================="
+          flake8 src/ --statistics 
+          
+          echo "=============================="
+          echo "      FLAKE8 COUNT"
+          echo "=============================="
+          flake8 src/  --count
